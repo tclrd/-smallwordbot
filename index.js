@@ -8,7 +8,7 @@ const fs = require('fs'),
 		googleConfig = require(path.join(__dirname, 'googleConfig.js'));
 
 // googleConfig.js and config.js required as per google-images / twit npm
-// packages - included fake____ as templates.
+// packages - replace process.env.____ with your keys
 
 //
 //GOOGLE API FOR PULLING IMAGES
@@ -75,11 +75,35 @@ const postTweet = (image, text) => {
 				}
 		});
 };
+const text = randomWord();
+imageSearch(text, output => {
+		//callback to run in sync
+		console.log(`Text: ${text}`);
+		//regex to scrub query strings and url paths keeping only filenames.
+		const pat = /[^/\\&\?]+\.\w{3,4}(?=([\?&].*$|$))/;
+		let res = pat.exec(output);
+		request(output).pipe(fs.createWriteStream(`./images/${res[0]}`));
+		// timeout required otherwise Twit produces Error status 400 Unrecognized Media
+		// Format due to file not being saved. Working on fix to run sync and avoid
+		// using timeouts entirely.
+		setTimeout(() => {
+				postTweet(res[0], text);
+		}, 10000);
+
+});
 //
 //automation of tweeting process, making the app into a bot
 //
 setInterval(() => {
 		const text = randomWord();
+		//random tweet interval between 1-7 hours
+		const interval = () => {
+				const min = 3600000,
+						max = 21600000;
+
+				return Math.floor(Math.random() * (21600000 - 3600000)) + 3600000;
+		};
+		console.log(interval());
 		imageSearch(text, output => {
 				//callback to run in sync
 				console.log(`Text: ${text}`);
@@ -95,4 +119,4 @@ setInterval(() => {
 				}, 10000);
 
 		});
-}, 300000);
+}, interval);
