@@ -92,33 +92,33 @@ imageSearch(text, output => {
 
 });
 
-//random tweet interval between 1-7 hours
-const interval = () => {
-		const min = 3600000,
-				max = 21600000;
+// //random tweet interval between 1-7 hours
+// const interval = () => {
+// 		const min = 3600000,
+// 				max = 21600000;
 
-		return Math.floor(Math.random() * (max - min)) + min;
-};
-//
-//automation of tweeting process, making the app into a bot
-//
-setInterval(() => {
-		const text = randomWord();
+// 		return Math.floor(Math.random() * (max - min)) + min;
+// };
+// //
+// //automation of tweeting process, making the app into a bot
+// //
+// setInterval(() => {
+// 		const text = randomWord();
 		
-		console.log(interval());
-		imageSearch(text, output => {
-				//callback to run in sync
-				console.log(`Text: ${text}`);
-				//regex to scrub query strings and url paths keeping only filenames.
-				const pat = /[^/\\&\?]+\.\w{3,4}(?=([\?&].*$|$))/;
-				let res = pat.exec(output);
-				request(output).pipe(fs.createWriteStream(`./images/${res[0]}`));
-				// timeout required otherwise Twit produces Error status 400 Unrecognized Media
-				// Format due to file not being saved. Working on fix to run sync and avoid
-				// using timeouts entirely.
-				setTimeout(() => {
-						postTweet(res[0], text);
-				}, 10000);
+// 		console.log(interval());
+// 		imageSearch(text, output => {
+// 				//callback to run in sync
+// 				console.log(`Text: ${text}`);
+// 				//regex to scrub query strings and url paths keeping only filenames.
+// 				const pat = /[^/\\&\?]+\.\w{3,4}(?=([\?&].*$|$))/;
+// 				let res = pat.exec(output);
+// 				request(output).pipe(fs.createWriteStream(`./images/${res[0]}`));
+// 				// timeout required otherwise Twit produces Error status 400 Unrecognized Media
+// 				// Format due to file not being saved. Working on fix to run sync and avoid
+// 				// using timeouts entirely.
+// 				setTimeout(() => {
+// 						postTweet(res[0], text);
+// 				}, 10000);
 
-		});
-}, interval);
+// 		});
+// }, interval);
