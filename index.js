@@ -91,18 +91,20 @@ imageSearch(text, output => {
 		}, 10000);
 
 });
+
+//random tweet interval between 1-7 hours
+const interval = () => {
+		const min = 3600000,
+				max = 21600000;
+
+		return Math.floor(Math.random() * (max - min)) + min;
+};
 //
 //automation of tweeting process, making the app into a bot
 //
 setInterval(() => {
 		const text = randomWord();
-		//random tweet interval between 1-7 hours
-		const interval = () => {
-				const min = 3600000,
-						max = 21600000;
-
-				return Math.floor(Math.random() * (21600000 - 3600000)) + 3600000;
-		};
+		
 		console.log(interval());
 		imageSearch(text, output => {
 				//callback to run in sync
