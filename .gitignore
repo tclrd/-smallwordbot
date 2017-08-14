@@ -1,0 +1,6 @@
+#Dependency diredtories
+node_modules/
+
+#config files
+config.js
+googleConfig.js
