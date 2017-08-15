@@ -23,5 +23,8 @@
     "request": "^2.81.0",
     "tiny-text": "^1.0.1",
     "twit": "^2.2.9"
+  },
+  "devDependencies": {
+    "dotenv": "^4.0.0"
   }
 }

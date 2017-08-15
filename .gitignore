@@ -1,2 +1,5 @@
 #Dependency diredtories
 node_modules/
+
+# node env vars ignored
+.env
