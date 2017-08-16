@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const fs = require('fs'),
 		path = require('path'),
 		Twit = require('twit'),
