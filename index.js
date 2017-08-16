@@ -31,7 +31,7 @@ const imageSearch = (queryString, callback) => {
 const T = new Twit(config);
 //TODO: FIX CALLBACK HELL HERE
 const postTweet = (image, text) => {
-		const image_path = path.join(`./images/${image}`),
+		const image_path = path.join(__dirname, `/images/${image}`),
 				b64content = fs.readFileSync(image_path, {encoding: 'base64'});
 		console.log('Uploading an image.. standby..');
 		T.post('media/upload', {
