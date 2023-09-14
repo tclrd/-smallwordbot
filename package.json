@@ -20,7 +20,7 @@
   "dependencies": {
     "google-images": "^2.1.0",
     "random-word": "^2.0.0",
-    "request": "^2.81.0",
+    "request": "^2.88.2",
     "tiny-text": "^1.0.1",
     "twit": "^2.2.9"
   },
